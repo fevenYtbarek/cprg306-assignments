@@ -32,17 +32,17 @@ export default function NewItem() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-sm">
+    <form className="space-y-4 max-w-sm w-full bg-white p-6 rounded-lg shadow" onSubmit={handleSubmit}>
       {/* name */}
       <div>
-        <label>Product Name</label>
+        <label className="block mb-1 font-medium">Product Name</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           onFocus={() => setTouched(false)}
           onBlur={() => setTouched(true)}
-          className={`border p-2 w-full ${
+          className={`border p-2 w-full rounded ${
             touched && !validName ? "border-red-500" : "border-gray-300"
           }`}
         />
@@ -53,22 +53,22 @@ export default function NewItem() {
 
       {/* quantity */}
       <div>
-        <label>Quantity</label>
+        <label className="block mb-1 font-medium">Quantity</label>
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => quantity > 1 && setQuantity(quantity - 1)}
-            className="px-3 py-1 border bg-gray-200"
+            className="px-3 py-1 border rounded bg-gray-200"
           >
             −
           </button>
 
-          <span>{quantity}</span>
+          <span className="font-medium">{quantity}</span>
 
           <button
             type="button"
             onClick={() => quantity < 99 && setQuantity(quantity + 1)}
-            className="px-3 py-1 border bg-blue-600 text-white"
+            className="px-3 py-1 border rounded bg-blue-600 text-white"
           >
             +
           </button>
@@ -77,11 +77,11 @@ export default function NewItem() {
 
       {/* category */}
       <div>
-        <label>Category</label>
+        <label className="block mb-1 font-medium">Category</label>
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="border p-2 w-full"
+          className="border p-2 w-full rounded"
         >
           <option value="produce">Produce</option>
           <option value="dairy">Dairy</option>
@@ -101,7 +101,7 @@ export default function NewItem() {
       <button
         type="submit"
         disabled={!validName}
-        className="bg-purple-600 text-white px-4 py-2 disabled:bg-gray-400"
+        className="w-full bg-purple-600 text-white py-2 rounded disabled:bg-gray-400"
       >
         Add Item
       </button>
