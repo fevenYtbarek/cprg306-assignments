@@ -17,10 +17,10 @@ type SortBy = "name" | "category" | "grouped";
 export default function ItemList() {
   const [sortBy, setSortBy] = useState<SortBy>("name");
 
-  // Make a copy so .sort() doesn't mutate the original JSON data
+  // Making a copy so .sort() doesn't mutate the original JSON data
   const items: ItemType[] = [...(itemsData as ItemType[])];
 
-  // Sort items for name/category modes
+  // Sorting items for name/category modes
   if (sortBy === "name") {
     items.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortBy === "category") {
@@ -94,8 +94,8 @@ export default function ItemList() {
             .sort()
             .map((category) => (
               <div key={category}>
-                <h2 className="mb-2 font-bold capitalize">{category}</h2>
-                <ul className="space-y-2">
+                <h2 className="mb-4 font-bold capitalize">{category}</h2>
+                <ul className="space-y-3">
                   {groupedItems[category].map((item) => (
                     <Item
                       key={item.id}
