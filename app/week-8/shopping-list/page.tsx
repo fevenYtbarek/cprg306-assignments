@@ -14,12 +14,27 @@ type ItemType = {
   category: string;
 };
 
+type NewItemType = {
+  name: string;
+  quantity: number;
+  category: string;
+};
+
 export default function ShoppingListPage() {
   const { user, firebaseSignOut } = useUserAuth();
   const [items, setItems] = useState<ItemType[]>(itemsData);
 
-  const handleAddItem = (item: ItemType) => {
-    setItems([...items, item]);
+  const handleAddItem = (item: NewItemType) => {
+    const newItem: ItemType = {
+      id: crypto.randomUUID(),
+      ...item,
+    };
+
+    setItems([...items, newItem]);
+  };
+
+  const handleItemSelect = (item: ItemType) => {
+    console.log("Selected:", item);
   };
 
   const handleSignOut = async () => {
@@ -60,7 +75,7 @@ export default function ShoppingListPage() {
       <p className="mb-4">Welcome, {user.displayName}</p>
 
       <NewItem onAddItem={handleAddItem} />
-      <ItemList items={items} />
+      <ItemList items={items} onItemSelect={handleItemSelect} />
     </main>
   );
 }
